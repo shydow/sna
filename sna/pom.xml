@@ -45,6 +45,29 @@
 			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.170</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>
+				datanucleus-accessplatform-jdo-rdbms
+			</artifactId>
+			<version>3.2.0-m2</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>20030825.184428</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.pool</artifactId>
+			<version>1.5.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>sna</finalName>
