@@ -9,6 +9,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>3.2.0.RELEASE</spring.version>
+		<datanucleus.version>3.2.0-m2</datanucleus.version>
 	</properties>
 
 	<dependencies>
@@ -45,17 +46,36 @@
 			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- data access -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.3.170</version>
 		</dependency>
 		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo-api</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>${datanucleus.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>${datanucleus.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>
 				datanucleus-accessplatform-jdo-rdbms
 			</artifactId>
-			<version>3.2.0-m2</version>
+			<version>${datanucleus.version}</version>
 			<type>pom</type>
 		</dependency>
 		<dependency>
@@ -69,6 +89,7 @@
 			<version>1.5.6</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>sna</finalName>
 
@@ -86,6 +107,24 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+				<version>3.2.0-m3</version>
+				<configuration>
+					<api>JDO</api>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

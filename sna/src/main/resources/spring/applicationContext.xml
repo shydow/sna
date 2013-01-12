@@ -32,7 +32,12 @@
 	<bean id="persistenceManagerFactory" class="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"
 		destroy-method="close">
 		<property name="connectionFactory" ref="dataSource" />
-		<property name="nontransactionalRead" value="true" />
+		<property name="persistenceProperties">
+			<props>
+				<prop key="datanucleus.autoCreateTables">true</prop>
+			
+			</props>
+		</property>
 	</bean>
 
 
