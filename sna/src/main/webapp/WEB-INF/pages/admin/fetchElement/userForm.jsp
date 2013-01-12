@@ -11,10 +11,11 @@
 </head>
 <body>
 
-        <form:form commandName="user" action="${ctx}/user/add" method="post">
-                No:<form:input path="userNo" />
+        <form:form commandName="fetchElement" action="${ctx}/admin/fetchElement/user/add" method="post">
+                No:<form:input path="id" />
                 <br>
-                source:<form:input path="source" value="1" readonly="true"/>
+                name:<form:input path="type" value="1"/>
+                <br>
                 <input type="submit">
         </form:form>
 

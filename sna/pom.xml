@@ -12,6 +12,14 @@
 		<datanucleus.version>3.2.0-m2</datanucleus.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>google-api-services</id>
+			<url>http://google-api-client-libraries.appspot.com/mavenrepo</url>
+		</repository>
+
+	</repositories>
+
 	<dependencies>
 
 		<!-- Spring 3 dependencies -->
@@ -46,6 +54,45 @@
 			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- gplus -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client-appengine</artifactId>
+			<version>1.13.1-beta</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.13.1-beta</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-appengine</artifactId>
+			<version>1.13.1-beta</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.jdo</groupId>
+					<artifactId>jdo2-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-appengine</artifactId>
+			<version>1.13.1-beta</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-plus</artifactId>
+			<version>v1-rev45-1.12.0-beta</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-jackson2</artifactId>
+			<version>1.13.1-beta</version>
+		</dependency>
+
 
 		<!-- data access -->
 		<dependency>
@@ -87,6 +134,26 @@
 			<groupId>org.apache.directory.studio</groupId>
 			<artifactId>org.apache.commons.pool</artifactId>
 			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>20030203.000129</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-jdo-query</artifactId>
+			<version>3.0.2</version>
 		</dependency>
 	</dependencies>
 
