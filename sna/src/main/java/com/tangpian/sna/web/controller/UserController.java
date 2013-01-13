@@ -27,7 +27,7 @@ public class UserController {
         @RequestMapping(value = "/add", method = RequestMethod.POST)
         public String createUser(User user) {
                 userService.createUser(user);
-                return "user/success";
+                return "redirect:/user/list";
         }
         
         @RequestMapping("/list")

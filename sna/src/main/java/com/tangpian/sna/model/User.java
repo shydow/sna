@@ -1,42 +1,34 @@
 package com.tangpian.sna.model;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import org.hibernate.annotations.GenericGenerator;
 
-@PersistenceCapable
+@Entity
 public class User {
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.UUIDSTRING)
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 
-	@Persistent
 	private String userNo;
 
-	@Persistent
 	private String username;
-	
-	@Persistent
+
 	private String nickname;
-	
-	@Persistent
+
 	private String biography;
-	
-	@Persistent
+
 	private String gender;
-	
-	@Persistent
+
 	private String imageUrl;
-	
-	@Persistent
+
 	private String url;
-	
-	@Persistent
+
 	private String relationshipStatus;
-	
+
 	public String getNickname() {
 		return nickname;
 	}

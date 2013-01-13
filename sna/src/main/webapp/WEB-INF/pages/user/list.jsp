@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:forEach items="${users}" var="user">
-		${user.username}<br/>
+		${user.userNo}<br/>
 	</c:forEach>
 </body>
 </html>

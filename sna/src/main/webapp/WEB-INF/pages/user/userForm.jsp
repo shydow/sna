@@ -14,7 +14,6 @@
         <form:form commandName="user" action="${ctx}/user/add" method="post">
                 No:<form:input path="userNo" />
                 <br>
-                source:<form:input path="source" value="1" readonly="true"/>
                 <input type="submit">
         </form:form>
 
