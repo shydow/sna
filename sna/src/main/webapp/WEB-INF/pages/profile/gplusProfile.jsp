@@ -10,8 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${users}" var="user">
-		${user.id} | ${user.username} | ${user.email} ||| <a href="${ctx}/profile/gplus/add?userId=${user.id}">addPlusAccount</a> | <a href="${ctx}/profile/gplus/list?userId=${user.id}">plusAccount</a> <br/>
-	</c:forEach>
+	${profile.id} | ${profile.account}
 </body>
 </html>

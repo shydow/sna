@@ -17,7 +17,7 @@ public class UserController {
 
         @Autowired
         private UserService userService;
-
+        
         @RequestMapping(value = "/add", method = RequestMethod.GET)
         public String addUserForm(ModelMap model) {
                 model.put("user", new User());

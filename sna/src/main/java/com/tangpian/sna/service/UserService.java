@@ -34,6 +34,10 @@ public class UserService {
 		}
 		return result;
 	}
+	
+	public User find(String id) {
+		return userDao.findOne(id);		
+	}
 
 //	public void FetchAndSave() {
 //		List<User> users = gplusFetch();

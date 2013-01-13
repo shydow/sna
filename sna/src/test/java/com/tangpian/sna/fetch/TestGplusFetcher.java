@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tangpian.sna.fetch.gplus.GplusFetcher;
+import com.tangpian.sna.model.Profile;
 import com.tangpian.sna.model.User;
 import com.tangpian.sna.service.UserService;
 
@@ -24,9 +25,9 @@ public class TestGplusFetcher {
 
 	@Test
 	public void test() {
-		List<User> users = fetcher.fetch("111081291678895561458");
-		for (User user : users) {
-			System.out.println(user.getNickname());
+		List<Profile> users = fetcher.fetchProfile("111081291678895561458");
+		for (Profile user : users) {
+			System.out.println(user.getAccount());
 		}
 	}
 

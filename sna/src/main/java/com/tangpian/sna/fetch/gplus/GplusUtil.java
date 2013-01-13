@@ -1,11 +1,11 @@
 package com.tangpian.sna.fetch.gplus;
 
 import com.google.api.services.plus.model.Person;
-import com.tangpian.sna.model.User;
+import com.tangpian.sna.model.GplusProfile;
 
 public class GplusUtil {
-	public static User transform(Person person) {
-		User user = new User();
+	public static GplusProfile transform(Person person) {
+		GplusProfile user = new GplusProfile();
 		
 		user.setBiography(person.getAboutMe());
 		user.setGender(person.getGender());
@@ -14,7 +14,7 @@ public class GplusUtil {
 		user.setRelationshipStatus(person.getRelationshipStatus());
 		user.setUrl(person.getUrl());
 		user.setUsername(person.getDisplayName());
-		user.setUserNo(person.getId());
+		user.setAccount(person.getId());
 		
 		return user;
 	}

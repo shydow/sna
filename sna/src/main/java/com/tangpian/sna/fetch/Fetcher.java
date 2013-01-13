@@ -2,7 +2,7 @@ package com.tangpian.sna.fetch;
 
 import java.util.List;
 
-import com.tangpian.sna.model.User;
+import com.tangpian.sna.model.Profile;
 
 public interface Fetcher {
 	/**
@@ -10,7 +10,7 @@ public interface Fetcher {
 	 * @param id
 	 * @return
 	 */
-	public List<User> fetch(String... id);
+	public List<Profile> fetchProfile(String... id);
 	
 	
 	

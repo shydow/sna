@@ -11,17 +11,18 @@ import org.springframework.stereotype.Component;
 import com.google.api.services.plus.Plus;
 import com.google.api.services.plus.model.Person;
 import com.tangpian.sna.fetch.Fetcher;
-import com.tangpian.sna.model.User;
+import com.tangpian.sna.model.GplusProfile;
+import com.tangpian.sna.model.Profile;
 
 @Component
-public class GplusFetcher implements Fetcher{
-	
+public class GplusFetcher implements Fetcher {
+
 	@Autowired
 	private GplusBuilder gplusBuilder;
 
 	@Override
-	public List<User> fetch(String... ids) {
-		List<User> users = new ArrayList<User>();
+	public List<Profile> fetchProfile(String... ids) {
+		List<Profile> users = new ArrayList<Profile>();
 		try {
 			Plus plus = gplusBuilder.getServicePlus();
 			for (String id : ids) {
@@ -38,5 +39,4 @@ public class GplusFetcher implements Fetcher{
 		return users;
 	}
 
-	
 }

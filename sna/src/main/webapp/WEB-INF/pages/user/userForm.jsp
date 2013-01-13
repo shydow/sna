@@ -12,7 +12,9 @@
 <body>
 
         <form:form commandName="user" action="${ctx}/user/add" method="post">
-                No:<form:input path="userNo" />
+                username:<form:input path="username" />
+                <br>
+                email:<form:input path="email" />
                 <br>
                 <input type="submit">
         </form:form>
