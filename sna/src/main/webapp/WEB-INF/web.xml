@@ -5,6 +5,12 @@
 
 	<display-name>SNA Application</display-name>
 
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<!-- <param-value>${profiles.active}</param-value> -->
+		<param-value>development</param-value>
+	</context-param>
+
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>

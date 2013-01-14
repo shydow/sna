@@ -18,7 +18,6 @@
 			<id>google-api-services</id>
 			<url>http://google-api-client-libraries.appspot.com/mavenrepo</url>
 		</repository>
-
 	</repositories>
 
 	<dependencies>
@@ -167,6 +166,13 @@
 	<build>
 		<finalName>sna</finalName>
 
+		<resources>
+			<resource>
+				<directory>src/main/webapp/WEB-INF</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -185,23 +191,55 @@
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> -->
-			<!-- <groupId>org.datanucleus</groupId> -->
-			<!-- <artifactId>datanucleus-maven-plugin</artifactId> -->
-			<!-- <version>3.2.0-m3</version> -->
-			<!-- <configuration> -->
-			<!-- <api>JPA</api> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>process-classes</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>enhance</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
+			<!-- Enabling and configuring web resources filtering -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp/WEB-INF</directory>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>development</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<profiles.active>production</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>

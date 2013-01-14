@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+	default-lazy-init="true">
 
 	<import resource="classpath:/component/**/component-*.xml" />
 
@@ -23,43 +30,56 @@
 			</list>
 		</property>
 	</bean>
-
-
-	<!-- data access -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${db.driverClassName}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-	</bean>
-
-	<!-- <bean id="sessionFactory" -->
-	<!-- class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
-	<!-- <property name="dataSource" ref="dataSource"></property> -->
-	<!-- </bean> -->
-	<!-- <bean id="transactionManager" -->
-	<!-- class="org.springframework.orm.hibernate4.HibernateTransactionManager"> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
-	<!-- </bean> -->
-
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
-				<property name="database" value="H2" />
+				<!-- <property name="database" value="H2" /> -->
 			</bean>
 		</property>
 		<property name="persistenceUnitName" value="jpa.tangpian" />
 	</bean>
+
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
 	<jpa:repositories base-package="com.tangpian.sna.dao" />
-	
+
 	<jpa:repositories base-package="com.tangpian.sna.component.**.dao" />
+
+	<beans profile="development">
+		<!-- data access -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<property name="driverClassName" value="${development.db.driverClassName}" />
+			<property name="url" value="${development.db.url}" />
+			<property name="username" value="${development.db.username}" />
+			<property name="password" value="${development.db.password}" />
+		</bean>
+	</beans>
+	<beans profile="test">
+		<!-- data access -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<property name="driverClassName" value="${test.db.driverClassName}" />
+			<property name="url" value="${test.db.url}" />
+			<property name="username" value="${test.db.username}" />
+			<property name="password" value="${test.db.password}" />
+		</bean>
+	</beans>
+	<beans profile="production">
+		<!-- data access -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<property name="driverClassName" value="${production.db.driverClassName}" />
+			<property name="url" value="${production.db.url}" />
+			<property name="username" value="${production.db.username}" />
+			<property name="password" value="${production.db.password}" />
+		</bean>
+	</beans>
+
 </beans>
