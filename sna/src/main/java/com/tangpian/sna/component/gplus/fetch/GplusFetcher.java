@@ -3,7 +3,9 @@ package com.tangpian.sna.component.gplus.fetch;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,33 +19,15 @@ import com.google.api.services.plus.model.Person;
 import com.tangpian.sna.fetch.Fetcher;
 import com.tangpian.sna.model.Content;
 import com.tangpian.sna.model.Profile;
+import com.tangpian.sna.model.Relation;
 
 @Component
 public class GplusFetcher implements Fetcher {
 
 	private static Logger logger = LoggerFactory.getLogger(GplusFetcher.class);
-	
+
 	@Autowired
 	private GplusBuilder gplusBuilder;
-
-	// @Override
-	// public List<Profile> fetchProfile(String... ids) {
-	// List<Profile> users = new ArrayList<Profile>();
-	// try {
-	// Plus plus = gplusBuilder.getServicePlus();
-	// for (String id : ids) {
-	// Person person = plus.people().get(id).execute();
-	// users.add(GplusUtil.transform(person));
-	// }
-	// } catch (GeneralSecurityException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return users;
-	// }
 
 	public Profile fetchProfile(String account) {
 		try {
@@ -60,8 +44,7 @@ public class GplusFetcher implements Fetcher {
 		return null;
 	}
 
-	@Override
-	public List<Content> fetchContent(String account) {
+	private List<Content> fetchContent(String account) {
 
 		List<Content> contents = new ArrayList<Content>();
 		try {
@@ -82,7 +65,8 @@ public class GplusFetcher implements Fetcher {
 							+ activity.getObject().getContent());
 				}
 
-				// We will know we are on the last page when the next page token is
+				// We will know we are on the last page when the next page token
+				// is
 				// null.
 				// If this is the case, break.
 				if (activityFeed.getNextPageToken() == null) {
@@ -104,6 +88,39 @@ public class GplusFetcher implements Fetcher {
 			e.printStackTrace();
 		}
 		return contents;
+	}
+
+	private List<Relation> fetchRelation(List<Content> contents) {
+		List<Relation> relations = new ArrayList<Relation>();
+
+		for (Content content : contents) {
+			try {
+				List<Person> people = gplusBuilder.getServicePlus().people()
+						.listByActivity(content.getContentNo(), "plusoners")
+						.execute().getItems();
+				for (Person person : people) {
+					relations.add(new Relation(content.getProfile()
+							.getAccount(), person.getId()));
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (GeneralSecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// TODO Auto-generated method stub
+		return relations;
+	}
+
+	@Override
+	public Map<String, List> fetchContentAndRelation(String account) {
+		Map<String, List> result = new HashMap<String, List>();
+		List<Content> contents = fetchContent(account);
+		result.put("contents", contents);
+		result.put("relations", fetchRelation(contents));
+		return result;
 	}
 
 }

@@ -161,17 +161,15 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.22</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<finalName>sna</finalName>
-
-		<resources>
-			<resource>
-				<directory>src/main/webapp/WEB-INF</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 
 		<plugins>
 			<plugin>
@@ -192,19 +190,19 @@
 			</plugin>
 
 			<!-- Enabling and configuring web resources filtering -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>src/main/webapp/WEB-INF</directory>
-							<filtering>true</filtering>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-war-plugin</artifactId> -->
+<!-- 				<version>2.0.2</version> -->
+<!-- 				<configuration> -->
+<!-- 					<webResources> -->
+<!-- 						<resource> -->
+<!-- 							<directory>WEB-INF</directory> -->
+<!-- 							<filtering>true</filtering> -->
+<!-- 						</resource> -->
+<!-- 					</webResources> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -216,30 +214,38 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+<!-- 		<resources> -->
+<!-- 			<resource> -->
+<!-- 				<directory>src/main/webapp/WEB-INF</directory> -->
+<!-- 				<filtering>true</filtering> -->
+<!-- 			</resource> -->
+<!-- 		</resources> -->
+
 	</build>
 
-	<profiles>
-		<profile>
-			<id>development</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<profiles.active>development</profiles.active>
-			</properties>
-		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<profiles.active>test</profiles.active>
-			</properties>
-		</profile>
-		<profile>
-			<id>production</id>
-			<properties>
-				<profiles.active>production</profiles.active>
-			</properties>
-		</profile>
-	</profiles>
+<!-- 	<profiles> -->
+<!-- 		<profile> -->
+<!-- 			<id>development</id> -->
+<!-- 			<activation> -->
+<!-- 				<activeByDefault>true</activeByDefault> -->
+<!-- 			</activation> -->
+<!-- 			<properties> -->
+<!-- 				<profiles.active>development</profiles.active> -->
+<!-- 			</properties> -->
+<!-- 		</profile> -->
+<!-- 		<profile> -->
+<!-- 			<id>test</id> -->
+<!-- 			<properties> -->
+<!-- 				<profiles.active>test</profiles.active> -->
+<!-- 			</properties> -->
+<!-- 		</profile> -->
+<!-- 		<profile> -->
+<!-- 			<id>production</id> -->
+<!-- 			<properties> -->
+<!-- 				<profiles.active>production</profiles.active> -->
+<!-- 			</properties> -->
+<!-- 		</profile> -->
+<!-- 	</profiles> -->
 
 </project>

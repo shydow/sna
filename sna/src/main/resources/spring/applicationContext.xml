@@ -30,18 +30,13 @@
 			</list>
 		</property>
 	</bean>
+
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="generateDdl" value="true" />
-				<!-- <property name="database" value="H2" /> -->
-			</bean>
-		</property>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"></property>
 		<property name="persistenceUnitName" value="jpa.tangpian" />
 	</bean>
-
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -60,6 +55,12 @@
 			<property name="username" value="${development.db.username}" />
 			<property name="password" value="${development.db.password}" />
 		</bean>
+
+		<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<property name="generateDdl" value="true" />
+			<property name="database" value="H2" />
+		</bean>
+
 	</beans>
 	<beans profile="test">
 		<!-- data access -->
@@ -70,6 +71,10 @@
 			<property name="username" value="${test.db.username}" />
 			<property name="password" value="${test.db.password}" />
 		</bean>
+		<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<property name="generateDdl" value="true" />
+			<property name="database" value="H2" />
+		</bean>
 	</beans>
 	<beans profile="production">
 		<!-- data access -->
@@ -79,6 +84,10 @@
 			<property name="url" value="${production.db.url}" />
 			<property name="username" value="${production.db.username}" />
 			<property name="password" value="${production.db.password}" />
+		</bean>
+		<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<property name="generateDdl" value="true" />
+			<property name="database" value="MYSQL" />
 		</bean>
 	</beans>
 
