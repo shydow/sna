@@ -10,9 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${ctx}/profile/gplus/add" method="post">
+	<form action="${ctx}/profile/add" method="post">
 		<input type="text" id="account" name="account"><br>
 		<input type="hidden" id="userId" name="userId" value="${userId}">
+		<select id="type" name="type">
+			<option value="1">gplus</option>
+		</select>
+		<br>
 		<input type="submit">
 	</form>
 

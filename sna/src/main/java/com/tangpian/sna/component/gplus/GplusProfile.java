@@ -1,6 +1,8 @@
-package com.tangpian.sna.model;
+package com.tangpian.sna.component.gplus;
 
 import javax.persistence.Entity;
+
+import com.tangpian.sna.model.Profile;
 
 @Entity
 public class GplusProfile extends Profile {

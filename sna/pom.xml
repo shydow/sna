@@ -180,6 +180,9 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<scanIntervalSeconds>30</scanIntervalSeconds>
+				</configuration>
 			</plugin>
 
 			<!-- <plugin> -->

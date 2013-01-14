@@ -1,11 +1,13 @@
 package com.tangpian.sna.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tangpian.sna.component.gplus.GplusProfile;
 import com.tangpian.sna.dao.ProfileDao;
 import com.tangpian.sna.dao.UserDao;
-import com.tangpian.sna.model.GplusProfile;
 import com.tangpian.sna.model.Profile;
 import com.tangpian.sna.model.User;
 
@@ -39,5 +41,9 @@ public class ProfileService {
 	
 	public Profile find(String userId, int type) {
 		return profileDao.findByUserIdAndType(userId, type);
+	}
+	
+	public List<Profile> find(String userId) {
+		return profileDao.findByUserId(userId);
 	}
 }

@@ -1,4 +1,4 @@
-package com.tangpian.sna.fetch.gplus;
+package com.tangpian.sna.component.gplus.fetch;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import com.google.api.services.plus.Plus;
 import com.google.api.services.plus.model.Person;
 import com.tangpian.sna.fetch.Fetcher;
-import com.tangpian.sna.model.GplusProfile;
 import com.tangpian.sna.model.Profile;
 
 @Component

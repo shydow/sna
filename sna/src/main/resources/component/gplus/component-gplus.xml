@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	
-	<bean id="gplusBuilder" class="com.tangpian.sna.fetch.gplus.GplusBuilder">
+	<bean id="gplusBuilder" class="com.tangpian.sna.component.gplus.fetch.GplusBuilder">
 		<property name="privateKeyFile" value="${gplus.privateKeyFile}"></property>
 		<property name="privateKeyType" value="${gplus.privateKeyType}"></property>
 		<property name="serviceAccountEmail" value="${gplus.serviceAccountEmail}"></property>

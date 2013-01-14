@@ -1,7 +1,7 @@
-package com.tangpian.sna.fetch.gplus;
+package com.tangpian.sna.component.gplus.fetch;
 
 import com.google.api.services.plus.model.Person;
-import com.tangpian.sna.model.GplusProfile;
+import com.tangpian.sna.component.gplus.GplusProfile;
 
 public class GplusUtil {
 	public static GplusProfile transform(Person person) {

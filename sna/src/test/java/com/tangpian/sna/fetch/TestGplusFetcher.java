@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tangpian.sna.fetch.gplus.GplusFetcher;
+import com.tangpian.sna.component.gplus.fetch.GplusFetcher;
 import com.tangpian.sna.model.Profile;
 import com.tangpian.sna.model.User;
 import com.tangpian.sna.service.UserService;

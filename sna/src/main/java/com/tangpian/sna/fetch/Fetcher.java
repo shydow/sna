@@ -12,7 +12,4 @@ public interface Fetcher {
 	 */
 	public List<Profile> fetchProfile(String... id);
 	
-	
-	
-	
 }

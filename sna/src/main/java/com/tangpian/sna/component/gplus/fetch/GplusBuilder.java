@@ -1,4 +1,4 @@
-package com.tangpian.sna.fetch.gplus;
+package com.tangpian.sna.component.gplus.fetch;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

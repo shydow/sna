@@ -13,4 +13,6 @@ public interface ProfileDao extends JpaRepository<Profile, String> {
 	public Profile findByUserAndType(User user, int type);
 	
 	public Profile findByUserIdAndType(String userId, int type);
+	
+	public List<Profile> findByUserId(String userId);
 }
