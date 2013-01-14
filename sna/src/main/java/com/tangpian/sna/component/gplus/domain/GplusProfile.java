@@ -1,4 +1,4 @@
-package com.tangpian.sna.component.gplus;
+package com.tangpian.sna.component.gplus.domain;
 
 import javax.persistence.Entity;
 
@@ -6,6 +6,8 @@ import com.tangpian.sna.model.Profile;
 
 @Entity
 public class GplusProfile extends Profile {
+	public static final int TYPE = 1;
+	
 	private String username;
 
 	private String nickname;
@@ -21,7 +23,7 @@ public class GplusProfile extends Profile {
 	private String relationshipStatus;
 	
 	public GplusProfile() {
-		this.setType(TYPE_GPLUS);
+		this.setType(TYPE);
 	}
 	
 	public String getUsername() {

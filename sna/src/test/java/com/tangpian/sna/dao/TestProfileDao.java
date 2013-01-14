@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tangpian.sna.component.gplus.GplusProfile;
+import com.tangpian.sna.component.gplus.domain.GplusProfile;
 import com.tangpian.sna.model.Profile;
 import com.tangpian.sna.model.User;
 

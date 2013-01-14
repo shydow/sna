@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tangpian.sna.component.gplus.GplusProfile;
+import com.tangpian.sna.component.gplus.domain.GplusProfile;
 import com.tangpian.sna.dao.ProfileDao;
 import com.tangpian.sna.dao.UserDao;
 import com.tangpian.sna.model.Profile;
@@ -24,7 +24,7 @@ public class ProfileService {
 		User user = userDao.findOne(userId);
 		Profile profile = null;
 		switch (type) {
-		case Profile.TYPE_GPLUS:
+		case GplusProfile.TYPE:
 			profile = new GplusProfile();
 			profile.setAccount(account);
 			profile.setUser(user);

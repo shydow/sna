@@ -2,7 +2,6 @@ package com.tangpian.sna.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Profile {
-	public static final int TYPE_UNKNOWN = 0;
-	public static final int TYPE_GPLUS = 1;
+	public static final int TYPE = 0;
 	
 	@Id
 	@GeneratedValue(generator = "system-uuid")
@@ -33,7 +31,7 @@ public abstract class Profile {
 	private int type;
 	
 	public Profile() {
-		setType(TYPE_UNKNOWN);
+		setType(TYPE);
 	}
 	
 	public User getUser() {
