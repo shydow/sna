@@ -19,5 +19,5 @@ public interface Fetcher {
 	 * @param account gplus帐号id
 	 * @return
 	 */
-	public Map<String, List> fetchContentAndRelation(String account);
+	public Map<String, List> fetchContentAndRelation(Profile profile);
 }

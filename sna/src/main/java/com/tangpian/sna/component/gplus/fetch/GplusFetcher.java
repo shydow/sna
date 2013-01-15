@@ -44,12 +44,12 @@ public class GplusFetcher implements Fetcher {
 		return null;
 	}
 
-	private List<Content> fetchContent(String account) {
+	private List<Content> fetchContent(Profile profile) {
 
 		List<Content> contents = new ArrayList<Content>();
 		try {
 			Plus.Activities.List listActivities = gplusBuilder.getServicePlus()
-					.activities().list(account, "public");
+					.activities().list(profile.getAccount(), "public");
 			listActivities.setMaxResults(100L);
 
 			// Execute the request for the first page
@@ -61,8 +61,7 @@ public class GplusFetcher implements Fetcher {
 			// Loop through until we arrive at an empty page
 			while (activities != null) {
 				for (Activity activity : activities) {
-					System.out.println("ID " + activity.getId() + " Content: "
-							+ activity.getObject().getContent());
+					contents.add(GplusUtil.transform(activity, profile));
 				}
 
 				// We will know we are on the last page when the next page token
@@ -115,9 +114,9 @@ public class GplusFetcher implements Fetcher {
 	}
 
 	@Override
-	public Map<String, List> fetchContentAndRelation(String account) {
+	public Map<String, List> fetchContentAndRelation(Profile profile) {
 		Map<String, List> result = new HashMap<String, List>();
-		List<Content> contents = fetchContent(account);
+		List<Content> contents = fetchContent(profile);
 		result.put("contents", contents);
 		result.put("relations", fetchRelation(contents));
 		return result;
