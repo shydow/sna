@@ -10,13 +10,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Profile {
-	public static final int TYPE = 0;
-
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -30,10 +29,6 @@ public abstract class Profile {
 	private Date fetchTime;
 
 	private int type;
-
-	public Profile() {
-		setType(TYPE);
-	}
 
 	public User getUser() {
 		return user;
@@ -90,6 +85,11 @@ public abstract class Profile {
 		return new EqualsBuilder().append(this.account, that.account)
 				.append(this.fetchTime, that.fetchTime)
 				.append(this.type, that.type).isEquals();
+	}
 
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getAccount())
+				.append(this.getFetchTime()).append(this.getType()).hashCode();
 	}
 }

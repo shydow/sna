@@ -3,9 +3,7 @@ package com.tangpian.sna.component.gplus.fetch;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,23 +17,29 @@ import com.google.api.services.plus.model.Person;
 import com.tangpian.sna.fetch.Fetcher;
 import com.tangpian.sna.model.Content;
 import com.tangpian.sna.model.Profile;
-import com.tangpian.sna.model.Relation;
 
 @Component
 public class GplusFetcher implements Fetcher {
 
 	private static Logger logger = LoggerFactory.getLogger(GplusFetcher.class);
-	
+
 	public static final String TYPE_CONTENT = "CONTENTS";
 	public static final String TYPE_RELATION = "RELATIONS";
+
+	public static final int MAX_QUOTAS = 10000;
 
 	@Autowired
 	private GplusBuilder gplusBuilder;
 
+	private static int quotas = 0;
+
 	public Profile fetchProfile(String account) {
 		try {
 			Plus plus = gplusBuilder.getServicePlus();
+			checkQuotas();
 			Person person = plus.people().get(account).execute();
+			quotas++;
+			logger.debug("Google Api Call Number:" + quotas);
 			return GplusUtil.transform(person);
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +51,7 @@ public class GplusFetcher implements Fetcher {
 		return null;
 	}
 
-	private List<Content> fetchContent(Profile profile) {
+	public List<Content> fetchContent(Profile profile) {
 
 		List<Content> contents = new ArrayList<Content>();
 		try {
@@ -56,7 +60,10 @@ public class GplusFetcher implements Fetcher {
 			listActivities.setMaxResults(100L);
 
 			// Execute the request for the first page
+			checkQuotas();
 			ActivityFeed activityFeed = listActivities.execute();
+			quotas++;
+			logger.debug("Google Api Call Number:" + quotas);
 
 			// Unwrap the request and extract the pieces we want
 			List<Activity> activities = activityFeed.getItems();
@@ -79,7 +86,10 @@ public class GplusFetcher implements Fetcher {
 				listActivities.setPageToken(activityFeed.getNextPageToken());
 
 				// Execute and process the next page request
+				checkQuotas();
 				activityFeed = listActivities.execute();
+				quotas++;
+				logger.debug("Google Api Call Number:" + quotas);
 				activities = activityFeed.getItems();
 			}
 		} catch (IOException e) {
@@ -92,37 +102,34 @@ public class GplusFetcher implements Fetcher {
 		return contents;
 	}
 
-	private List<Relation> fetchRelation(List<Content> contents) {
-		List<Relation> relations = new ArrayList<Relation>();
-
-		for (Content content : contents) {
-			try {
-				List<Person> people = gplusBuilder.getServicePlus().people()
-						.listByActivity(content.getContentNo(), "plusoners")
-						.execute().getItems();
-				for (Person person : people) {
-					relations.add(new Relation(content.getProfile()
-							.getAccount(), person.getId()));
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (GeneralSecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	private void checkQuotas() {
+		if (quotas >= MAX_QUOTAS) {
+			throw new RuntimeException("Google Api Quotas exceed the limit");
 		}
-		// TODO Auto-generated method stub
-		return relations;
 	}
 
-	@Override
-	public Map<String, List> fetchContentAndRelation(Profile profile) {
-		Map<String, List> result = new HashMap<String, List>();
-		List<Content> contents = fetchContent(profile);
-		result.put(TYPE_CONTENT, contents);
-		result.put(TYPE_RELATION, fetchRelation(contents));
-		return result;
-	}
+//	private List<Relation> fetchRelation(List<Content> contents) {
+//		List<Relation> relations = new ArrayList<Relation>();
+//
+//		// for (Content content : contents) {
+//		// try {
+//		// List<Person> people = gplusBuilder.getServicePlus().people()
+//		// .listByActivity(content.getContentNo(), "plusoners")
+//		// .execute().getItems();
+//		// for (Person person : people) {
+//		// relations.add(new Relation(content.getProfile()
+//		// .getAccount(), person.getId()));
+//		// }
+//		// } catch (IOException e) {
+//		// // TODO Auto-generated catch block
+//		// e.printStackTrace();
+//		// } catch (GeneralSecurityException e) {
+//		// // TODO Auto-generated catch block
+//		// e.printStackTrace();
+//		// }
+//		// }
+//		// TODO Auto-generated method stub
+//		return relations;
+//	}
 
 }

@@ -14,7 +14,7 @@ import com.tangpian.sna.model.Content;
 import com.tangpian.sna.model.Profile;
 
 @Service
-public class ScheduleService {
+public class ContentService {
 	@Autowired
 	private GplusFetcher gplusFetcher;
 
@@ -27,26 +27,18 @@ public class ScheduleService {
 	@Autowired
 	private ContentDao contentDao;
 
-	public void bulkUpdate() {
-		List<Profile> profiles = profileDao.findAll();
-
-		updateContents(profiles);
-	}
-
-	private void updateContents(List<Profile> profiles) {
-		for (Profile profile : profiles) {
-			updateContents(profile);
-		}
-	}
-
 	public List<Content> updateContents(Profile profile) {
-		List<Content> contents = gplusFetcher.fetchContent(profile);
-		contentDao.save(contents);
-		profile.setFetchTime(new Date());
-		profileDao.save(profile);
-		return contents;
+		if (null == profile.getFetchTime()
+				|| oldThanNow(profile.getFetchTime()) > 7) {
+			List<Content> contents = gplusFetcher.fetchContent(profile);
+			contentDao.save(contents);
+			profile.setFetchTime(new Date());
+			profileDao.save(profile);
+			return contents;
+		}
+		return null;
 	}
-	
+
 	private long oldThanNow(Date past) {
 		return (new Date().getTime() - past.getTime()) / (24 * 60 * 60 * 1000L);
 	}

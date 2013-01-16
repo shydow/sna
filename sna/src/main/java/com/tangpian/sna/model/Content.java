@@ -10,7 +10,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.tangpian.sna.component.gplus.domain.GplusContent;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -81,6 +85,26 @@ public class Content {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (null == obj) {
+			return false;
+		}
+
+		if (!(obj instanceof GplusContent)) {
+			return false;
+		}
+
+		GplusContent that = (GplusContent) obj;
+		return new EqualsBuilder().append(this.getContentNo(),
+				that.getContentNo()).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getContentNo()).hashCode();
 	}
 
 }

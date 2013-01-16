@@ -6,6 +6,7 @@ import com.google.api.services.plus.model.Activity;
 import com.google.api.services.plus.model.Person;
 import com.tangpian.sna.component.gplus.domain.GplusContent;
 import com.tangpian.sna.component.gplus.domain.GplusProfile;
+import com.tangpian.sna.model.Content;
 import com.tangpian.sna.model.Profile;
 
 public class GplusUtil {
@@ -24,7 +25,7 @@ public class GplusUtil {
 		return user;
 	}
 
-	public static GplusContent transform(Activity activity,Profile profile) {
+	public static Content transform(Activity activity,Profile profile) {
 		GplusContent content = new GplusContent();
 		content.setContentNo(activity.getId());
 		content.setNote(activity.getObject().getContent());
@@ -33,4 +34,5 @@ public class GplusUtil {
 		content.setProfile(profile);
 		return content;
 	}
+	
 }

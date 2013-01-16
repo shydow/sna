@@ -13,7 +13,6 @@ import com.tangpian.sna.model.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/applicationContext.xml" })
 @ActiveProfiles("production")
-@Ignore
 public class TestScheduleService {
 	
 	@Autowired

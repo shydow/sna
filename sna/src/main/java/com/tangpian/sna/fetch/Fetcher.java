@@ -3,6 +3,7 @@ package com.tangpian.sna.fetch;
 import java.util.List;
 import java.util.Map;
 
+import com.tangpian.sna.model.Content;
 import com.tangpian.sna.model.Profile;
 
 public interface Fetcher {
@@ -19,5 +20,5 @@ public interface Fetcher {
 	 * @param account gplus帐号id
 	 * @return
 	 */
-	public Map<String, List> fetchContentAndRelation(Profile profile);
+	public List<Content> fetchContent(Profile profile);
 }

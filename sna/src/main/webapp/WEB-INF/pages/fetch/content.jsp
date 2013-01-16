@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:forEach items="${profiles}" var="profile">
-		${profile.id} | ${profile.account} |${profile.type} ||| <a href="${ctx}/fetch/content?account=${profile.content}&type=${profile.type}"></a><br>
+		${profile.id} | ${profile.account} |${profile.type} ||| <br>
 	</c:forEach>
 </body>
 </html>
