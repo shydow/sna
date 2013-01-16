@@ -25,6 +25,9 @@ import com.tangpian.sna.model.Relation;
 public class GplusFetcher implements Fetcher {
 
 	private static Logger logger = LoggerFactory.getLogger(GplusFetcher.class);
+	
+	public static final String TYPE_CONTENT = "CONTENTS";
+	public static final String TYPE_RELATION = "RELATIONS";
 
 	@Autowired
 	private GplusBuilder gplusBuilder;
@@ -117,8 +120,8 @@ public class GplusFetcher implements Fetcher {
 	public Map<String, List> fetchContentAndRelation(Profile profile) {
 		Map<String, List> result = new HashMap<String, List>();
 		List<Content> contents = fetchContent(profile);
-		result.put("contents", contents);
-		result.put("relations", fetchRelation(contents));
+		result.put(TYPE_CONTENT, contents);
+		result.put(TYPE_RELATION, fetchRelation(contents));
 		return result;
 	}
 

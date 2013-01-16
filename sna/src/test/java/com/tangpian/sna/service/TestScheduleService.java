@@ -1,5 +1,6 @@
-package com.tangpian.sna.fetch;
+package com.tangpian.sna.service;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,28 +8,19 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tangpian.sna.component.gplus.fetch.GplusFetcher;
-import com.tangpian.sna.model.Profile;
-import com.tangpian.sna.service.UserService;
+import com.tangpian.sna.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/applicationContext.xml" })
-@ActiveProfiles("test")
-public class TestGplusFetcher {
+@ActiveProfiles("production")
+@Ignore
+public class TestScheduleService {
+	
 	@Autowired
-	GplusFetcher fetcher;
-
-	@Autowired
-	UserService userService;
-
+	private ScheduleService scheduleService;
+	
 	@Test
 	public void test() {
-		Profile profile = fetcher.fetchProfile("111081291678895561458");
-		System.out.println(profile.getAccount());
-	}
-
-	@Test
-	public void testContent() {
-		
+		scheduleService.bulkUpdate();
 	}
 }
