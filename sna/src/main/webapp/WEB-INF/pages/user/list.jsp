@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:forEach items="${users}" var="user">
-		${user.id} | ${user.username} | ${user.email} ||| <a href="${ctx}/profile/add?userId=${user.id}">add SNS Account</a> | <a href="${ctx}/profile/list?userId=${user.id}">show SNS Account</a> <br/>
+		${user.id} | ${user.username} | ${user.email} ||| <a href="${ctx}/${user.id}/profile/add">add SNS Account</a> | <a href="${ctx}/${user.id}/profile/list">show SNS Account</a> <br/>
 	</c:forEach>
 </body>
 </html>

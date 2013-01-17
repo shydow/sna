@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,7 @@ import com.tangpian.sna.model.Profile;
 import com.tangpian.sna.service.ProfileService;
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping("profile")
 public class ProfileController {
 
 	@Autowired

@@ -10,8 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${profiles}" var="profile">
-		${profile.id} | ${profile.account} |${profile.type} ||| <br>
+	<c:forEach items="${contents}" var="content" begin="0" end="20" step="1">
+		${content.contentNo} |${content.published}<br>
+		${content.note} <br>
+		<hr>
 	</c:forEach>
 </body>
 </html>
