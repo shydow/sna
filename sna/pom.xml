@@ -8,7 +8,8 @@
 	<name>sna Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<spring.version>3.2.0.RELEASE</spring.version>
+<!-- 		<spring.version>3.2.0.RELEASE</spring.version> -->
+		<spring.version>[4.3.17,)</spring.version>
 		<datanucleus.version>3.2.0-m2</datanucleus.version>
 		<slf4j.version>1.6.6</slf4j.version>
 	</properties>
@@ -172,7 +173,8 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.2.0.RELEASE</version>
+<!-- 			<version>1.2.0.RELEASE</version> -->
+			<version>[1.11.22,)</version>
 		</dependency>
 
 		<!-- common -->
